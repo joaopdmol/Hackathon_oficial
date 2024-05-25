@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Execute Python Script</title>
+    <style>
+      .container-button {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr;
+        grid-template-areas:
+          "bt-1 bt-2 bt-3"
+          "bt-4 bt-5 bt-6";
+        position: relative;
+        perspective: 800;
+        padding: 0;
+        width: 10rem;
+        height: 5rem;
+        transition: all 0.3s ease-in-out;
+      }
+
+      .container-button:active {
+        transform: scale(0.95);
+      }
+
+      .hover {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        z-index: 200;
+      }
+
+      .bt-1 {
+        grid-area: bt-1;
+      }
+
+      .bt-2 {
+        grid-area: bt-2;
+      }
+
+      .bt-3 {
+        grid-area: bt-3;
+      }
+
+      .bt-4 {
+        grid-area: bt-4;
+      }
+
+      .bt-5 {
+        grid-area: bt-5;
+      }
+
+      .bt-6 {
+        grid-area: bt-6;
+      }
+
+      .bt-1:hover ~ button {
+        transform: rotateX(15deg) rotateY(-15deg) rotateZ(0deg);
+        box-shadow: -2px -2px #18181888;
+      }
+
+      .bt-1:hover ~ button::after {
+        animation: shake 0.5s ease-in-out 0.3s;
+        text-shadow: -2px -2px #18181888;
+      }
+
+      .bt-3:hover ~ button {
+        transform: rotateX(15deg) rotateY(15deg) rotateZ(0deg);
+        box-shadow: 2px -2px #18181888;
+      }
+
+      .bt-3:hover ~ button::after {
+        animation: shake 0.5s ease-in-out 0.3s;
+        text-shadow: 2px -2px #18181888;
+      }
+
+      .bt-4:hover ~ button {
+        transform: rotateX(-15deg) rotateY(-15deg) rotateZ(0deg);
+        box-shadow: -2px 2px #18181888;
+      }
+
+      .bt-4:hover ~ button::after {
+        animation: shake 0.5s ease-in-out 0.3s;
+        text-shadow: -2px 2px #18181888;
+      }
+
+      .bt-6:hover ~ button {
+        transform: rotateX(-15deg) rotateY(15deg) rotateZ(0deg);
+        box-shadow: 2px 2px #18181888;
+      }
+
+      .bt-6:hover ~ button::after {
+        animation: shake 0.5s ease-in-out 0.3s;
+        text-shadow: 2px 2px #18181888;
+      }
+
+      .hover:hover ~ button::before {
+        background: transparent;
+      }
+
+      .hover:hover ~ button::after {
+        content: "Executar";
+        top: -150%;
+        transform: translate(-50%, 0);
+        font-size: 34px;
+        color: #0f2d45;
+      }
+      .hover:hover ~ .joaop::after {
+        content: "Visualizar";
+        top: -150%;
+        transform: translate(-50%, 0);
+        font-size: 34px;
+        color: #0f2d45;
+      }
+
+      button {
+        position: absolute;
+        padding: 0;
+        width: 10rem;
+        height: 5rem;
+        background: transparent;
+        font-size: 17px;
+        font-weight: 900;
+        border: 3px solid #0f2d45;
+        border-radius: 12px;
+        transition: all 0.3s ease-in-out;
+      }
+
+      button::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 10rem;
+        height: 5rem;
+        background-color: #0f2d45;
+        border-radius: 12px;
+        transition: all 0.3s ease-in-out;
+        z-index: -1;
+      }
+
+      button::after {
+        content: "Executar";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 10rem;
+        height: 5rem;
+        background-color: transparent;
+        font-size: 17px;
+        font-weight: 900;
+        line-height: 5rem;
+        color: #ffffff;
+        border: none;
+        border-radius: 12px;
+        transition: all 0.3s ease-in-out;
+        z-index: 2;
+      }
+      .joaop::after {
+        content: "Visualizar";
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        width: 10rem;
+        height: 5rem;
+        background-color: transparent;
+        font-size: 17px;
+        font-weight: 900;
+        line-height: 5rem;
+        color: #ffffff;
+        border: none;
+        border-radius: 12px;
+        transition: all 0.3s ease-in-out;
+        z-index: 2;
+      }
+
+      @keyframes shake {
+        0% {
+          left: 45%;
+        }
+
+        25% {
+          left: 54%;
+        }
+
+        50% {
+          left: 48%;
+        }
+
+        75% {
+          left: 52%;
+        }
+
+        100% {
+          left: 50%;
+        }
+      }
+
+      /* button {
+        padding: 10px 20px;
+        font-size: 32px;
+        cursor: pointer;
+        background: #266395;
+        color: #ffffff;
+        border-radius: 4px;
+        height: 100px;
+        width: 300px;
+      }
+      button:hover {
+        background: #0f2d45;
+      } */
+
+      .wrapper {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+        font-family: Arial, sans-serif;
+        background: white;
+      }
+      .header_joao {
+        width: 100%;
+        height: 10vh;
+        background: #0f2d45;
+        top: 0;
+        position: absolute;
+        align-items: center;
+        justify-content: center;
+        display: flex;
+      }
+
+      .foto-pato {
+        position: absolute;
+        right: 0px;
+        bottom: 0px;
+      }
+
+    </style>
+    <script>
+      function executeScript() {
+        fetch("/execute-script", {
+          method: "POST",
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            if (data.status === "success") {
+              alert("Script started successfully!");
+            } else {
+              alert("Error starting script: " + data.message);
+            }
+          })
+          .catch((error) => {
+            alert("Error: " + error);
+          });
+      }
+
+      function executeVis() {
+        fetch("/execute-vis", {
+          method: "POST",
+        })
+          .then((response) => response.json())
+          .then((data) => {
+            if (data.status === "success") {
+              alert("Script started successfully!");
+            } else {
+              alert("Error starting script: " + data.message);
+            }
+          })
+          .catch((error) => {
+            alert("Error: " + error);
+          });
+      }
+    </script>
+  </head>
+  <body class="wrapper">
+    <div class="header_joao">
+      <img
+        src="https://www.idp.edu.br/wp-content/themes/idp_principal_2020/img/id-idp.png"
+        alt="logo Idp"
+      />
+    </div>
+    <div class="foto-pato">
+      <img src="https://github.com/ThiagoAugustoGough.png" height = 200px/>
+    </div>
+    <!-- <button onclick="executeScript()">Executar</button>
+    <button onclick="executeVis()">Visualizar</button> -->
+    <a href="#" onclick="executeScript()">
+      <div class="container-button" style="margin-right: 1rem">
+        <div class="hover bt-1"></div>
+        <div class="hover bt-2"></div>
+        <div class="hover bt-3"></div>
+        <div class="hover bt-4"></div>
+        <div class="hover bt-5"></div>
+        <div class="hover bt-6"></div>
+        <button></button>
+      </div>
+    </a>
+    <a href="#" onclick="executeVis()">
+      <div class="container-button">
+        <div class="hover bt-1"></div>
+        <div class="hover bt-2"></div>
+        <div class="hover bt-3"></div>
+        <div class="hover bt-4"></div>
+        <div class="hover bt-5"></div>
+        <div class="hover bt-6"></div>
+        <button class="joaop"></button>
+      </div>
+    </a>
+  </body>
+</html>
